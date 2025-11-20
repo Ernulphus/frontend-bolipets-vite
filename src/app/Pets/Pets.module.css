@@ -1,0 +1,17 @@
+.pet_container {
+  margin: 2rem 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  outline: 1px solid purple;
+  border-radius: 5px;
+}
+
+.pet_container img {
+  outline: 1px solid black;
+  aspect-ratio: 1 / 1;
+  width: 10rem;
+  border-radius: 5px;
+}

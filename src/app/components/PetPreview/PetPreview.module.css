@@ -1,0 +1,25 @@
+.pet_preview div {
+  background-color: purple;
+  mask-mode: alpha;
+  mask-size: contain;
+  z-index: -1; 
+}
+
+div.pet_preview {
+  height: 15rem;
+  margin: 20px;
+  aspect-ratio: 1 / 1;
+}
+
+.pet_preview img,
+.pet_preview div {
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  width: 15rem;
+  padding: 0;
+}
+
+.pet_preview img {
+  position: relative;
+  top: -15rem;
+}
