@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from "next/link";
+import { Link } from 'react-router';
 
 interface Page {
   label: string;
@@ -21,7 +21,7 @@ function NavLink(props: NavLinkProps) {
   const { label, destination } = page;
   return (
     <li>
-      <Link href={destination}>{label}</Link>
+      <Link to={destination}>{label}</Link>
     </li>
   );
 }

@@ -1,10 +1,7 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function LoginSignup() {  
-  return (
-    <main>
-      <a href="/auth/login?screen_hint=signup">Sign up</a>
-      <a href="/auth/login">Log in</a>
-    </main>
-  );
+  const { loginWithRedirect } = useAuth0();
+  return <button onClick={() => loginWithRedirect()}>Log in or sign up</button>;
 }

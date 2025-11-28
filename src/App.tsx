@@ -1,19 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
+import { useAuth0 } from '@auth0/auth0-react';
 
 import './App.css'
-import Home from "./app/page";
+import './global.css';
+import Home from "./app/Home";
+import LoginSignup from "./lib/LoginSignup";
+import Navbar from "./app/components/Navbar/Navbar";
 
 function App() {
+  const { isLoading, isAuthenticated, error } = useAuth0();
 
-  return (
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (isAuthenticated) {
+    return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
   )
+  } else {
+    return <LoginSignup />
+  }
+
+  
 }
 
 export default App
