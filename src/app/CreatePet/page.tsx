@@ -1,34 +1,27 @@
-'use client'
-
-import { petsCreate, petsForm } from '@/app/utils/networkutils';
+import { petsCreate, petsForm } from '../utils/networkutils';
 import React, { useState, useEffect } from 'react';
-import Form, { questionObj, getQuestionValue } from '@/app/components/Form/Form';
-import PetPreview from '@/app/components/PetPreview/PetPreview';
-import { auth0 } from '@/lib/auth0';
-import LoginSignup from '@/lib/LoginSignup';
-import { SessionData } from '@auth0/nextjs-auth0/types';
+import Form, { getQuestionValue } from '../components/Form/Form';
+import type { questionObj } from '../components/Form/Form';
+import PetPreview from '../components/PetPreview/PetPreview';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { pet_images } from '../constants';
 
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
-  const [session, setSession] = useState<SessionData | null>(null)
+
+  const { user } = useAuth0();
+  if (!user) return;
 
   useEffect(() => {
-    auth0.getSession()
-      .then(setSession);
     petsForm()
     .then((data) => setForm(data as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
   }, []);
   
-  if (!session) return (
-    <LoginSignup />
-  );
-  
   const submitPet = (formData: FormData) => {
     const newPet = {
-      email: session.user.email,
-      name: session.user.name,
+      email: user.email,
+      name: user.name,
       ...formData,
     };
     petsCreate(newPet);
