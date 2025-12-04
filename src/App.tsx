@@ -8,6 +8,7 @@ import './global.css';
 import Home from "./app/Home";
 import LoginSignup from "./lib/LoginSignup";
 import Navbar from "./app/components/Navbar/Navbar";
+import CreatePet from "./app/CreatePet/CreatePet";
 
 function App() {
   const { isLoading, isAuthenticated, error } = useAuth0();
@@ -25,6 +26,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/CreatePet" element={<CreatePet />} />
       </Routes>
     </BrowserRouter>
   )

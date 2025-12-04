@@ -1,4 +1,4 @@
-import { SessionData } from "@auth0/nextjs-auth0/types";
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 const methods: { [key: string]: string } = {
@@ -15,12 +15,14 @@ const methods: { [key: string]: string } = {
 
 };
 
+const HEADERS = 'headers';
+
 const epGroups: { [key: string]: string } = {
   PETS: 'Pets',
   USERS: 'Users',
 };
 
-const BACKEND_URL = (process.env.NEXT_PUBLIC_URL_PRE || 'http://127.0.0.1:8000');
+const BACKEND_URL = (import.meta.env.VITE_PUBLIC_URL_PRE || 'http://127.0.0.1:8000');
 
 function getURL(group:string, method:string, queryObj?:object | null) {
   if (!BACKEND_URL) throw new Error('No base URL');
@@ -56,17 +58,22 @@ const petsCreate = (formData: FormData) => {
   });
 };
 
-const petsRead = (session: SessionData | null) => {
+const petsRead = () => {
   return new Promise((resolve, reject) => {
-    axios.get(getURL(epGroups.PETS, methods.READ, session))
+    
+    axios.get(getURL(epGroups.PETS, methods.READ),
+    { headers: { Authorization: `Bearer ${token}`} })
     .then(({ data }) => resolve(data))
     .catch(reject);
   });
 };
 
-const petsForm = () => {
+const petsForm = (token: string) => {
+  const url = getURL(epGroups.PETS, methods.FORM);
   return new Promise((resolve, reject) => {
-    axios.get(getURL(epGroups.PETS, methods.FORM))
+    axios.get(url,
+      { headers: {Authorization: token }}
+    )
     .then(({ data }) => resolve(data))
     .catch(reject);
   })

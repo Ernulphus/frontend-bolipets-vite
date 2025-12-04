@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PetPreview.module.css';
-import { pet_images } from '@/app/constants';
+import { pet_images } from '../../constants';
 
 type petImages = typeof pet_images;
 

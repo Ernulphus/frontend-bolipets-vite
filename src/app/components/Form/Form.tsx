@@ -1,5 +1,5 @@
-import { StaticImageData } from "next/image";
-import React, { useState, Dispatch } from "react";
+import { useState } from "react";
+import type { Dispatch } from "react";
 
 import Wheel from "@uiw/react-color-wheel";
 import { hsvaToHex } from "@uiw/color-convert"
@@ -9,7 +9,7 @@ import styles from './Form.module.css';
 interface QuestionProps {
   question: string,
   fld_name: string,
-  images: {[key: string]: StaticImageData};
+  images: {[key: string]: string};
   form: [questionObj] | undefined;
   setForm: Dispatch<[questionObj] | undefined>;
 }
@@ -97,7 +97,7 @@ interface questionObj {
 interface FormProps {
   questions: [questionObj] | undefined;
   onSubmit: (formData: FormData) => void;
-  images: {[key: string]: {[key: string]: StaticImageData}};
+  images: {[key: string]: {[key: string]: string}};
   setForm: Dispatch<[questionObj] | undefined>;
 }
 
