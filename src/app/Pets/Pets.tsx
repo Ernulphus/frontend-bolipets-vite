@@ -1,17 +1,15 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
 import style from './Pets.module.css';
  
-import { petsRead } from '@/app/utils/networkutils';
+import { epGroups, methods, getURL, petsRead } from '../utils/networkutils';
 import { pet_images } from '../constants';
 import PetPreview from '../components/PetPreview/PetPreview';
 
-import { auth0 } from '@/lib/auth0';
-import LoginSignup from '@/lib/LoginSignup';
-import { SessionData } from '@auth0/nextjs-auth0/types';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function ErrorMessage(props: ErrorMessageProps) {
   const { message } = props;
@@ -86,10 +84,10 @@ function petsObjectToArray(Data: petObject) {
 export default function Pets() {
   const [error, setError] = useState('');
   const [pets, setPets] = useState([] as Pet[]);
-  const [session, setSession] = useState<SessionData | null>(null)
-  
-  const fetchPets = () => {
-    petsRead(session)
+  const { getAccessTokenSilently } = useAuth0();
+
+  const fetchPets = (token: string) => {
+    petsRead(token)
     .then(
       (data) => { setPets(petsObjectToArray(data as petObject)) }
     )
@@ -97,17 +95,14 @@ export default function Pets() {
   };
   
   useEffect(() => {
-    auth0.getSession()
-      .then(setSession);
-    fetchPets()
-  }, [session]);
-
-  if (session) {console.log(session.accessTokens)}
-
-  if (!session) return (
-    <LoginSignup />
-  );
-
+    getAccessTokenSilently({
+      authorizationParams: {
+        audience: getURL(epGroups.PETS, methods.READ),
+        scope: 'read:pets',
+      },
+    })
+      .then(fetchPets)
+  }, []);
 
   return (
     <div className="wrapper">

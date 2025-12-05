@@ -58,7 +58,7 @@ const petsCreate = (formData: FormData) => {
   });
 };
 
-const petsRead = () => {
+const petsRead = (token: string | null) => {
   return new Promise((resolve, reject) => {
     
     axios.get(getURL(epGroups.PETS, methods.READ),
