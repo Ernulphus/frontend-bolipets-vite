@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -9,6 +7,7 @@ import Home from "./app/Home";
 import LoginSignup from "./lib/LoginSignup";
 import Navbar from "./app/components/Navbar/Navbar";
 import CreatePet from "./app/CreatePet/CreatePet";
+import Pets from "./app/Pets/Pets";
 
 function App() {
   const { isLoading, isAuthenticated, error } = useAuth0();
@@ -26,6 +25,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Pets" element={<Pets />} />
         <Route path="/CreatePet" element={<CreatePet />} />
       </Routes>
     </BrowserRouter>

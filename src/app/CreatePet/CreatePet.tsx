@@ -1,5 +1,5 @@
 import { petsCreate, petsForm } from '../utils/networkutils';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Form, { getQuestionValue } from '../components/Form/Form';
 import type { questionObj } from '../components/Form/Form';
 import PetPreview from '../components/PetPreview/PetPreview';
