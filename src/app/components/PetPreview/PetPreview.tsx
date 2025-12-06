@@ -20,7 +20,7 @@ export default function PetPreview<K extends keyof petImages>({color, pet}: PetP
         WebkitMaskImage: defaultImageURL,
       }}/>
       <img
-        src={pet_images[pet].TRANSPARENT.src}
+        src={pet_images[pet].TRANSPARENT}
       />
     </div>
   )

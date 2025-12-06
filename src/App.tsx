@@ -16,7 +16,7 @@ function App() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (true || isAuthenticated) {
+  if (isAuthenticated) {
     return (
     <BrowserRouter>
       <Navbar />
