@@ -46,11 +46,13 @@ function queryObjToString(queryObj:object | null) {
 
 
 const petsCreateURL = getURL(epGroups.PETS, methods.CREATE);
-const petsCreate = (formData: FormData) => {
+
+const petsCreate = (formData: FormData, token: string) => {
   return new Promise((resolve, reject) => {
     axios.post(petsCreateURL, formData, {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       }
     })
     .then(resolve)
@@ -68,12 +70,10 @@ const petsRead = (token: string | null) => {
   });
 };
 
-const petsForm = (token: string) => {
+const petsForm = () => {
   const url = getURL(epGroups.PETS, methods.FORM);
   return new Promise((resolve, reject) => {
-    axios.get(url,
-      { headers: {Authorization: token }}
-    )
+    axios.get(url)
     .then(({ data }) => resolve(data))
     .catch(reject);
   })

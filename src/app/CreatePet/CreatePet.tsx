@@ -9,13 +9,22 @@ import { pet_images } from '../constants';
 
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
+  const [token, setToken] = useState<string>('');
 
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
   if (!user) return;
 
   useEffect(() => {
     petsForm()
     .then((data) => setForm(data as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
+
+    getAccessTokenSilently({
+      authorizationParams: {
+        audience: '',
+        scope: 'create:pets',
+      },
+    })
+      .then(setToken);
   }, []);
   
   const submitPet = (formData: FormData) => {
@@ -24,7 +33,7 @@ export default function CreatePet() {
       name: user.name,
       ...formData,
     };
-    petsCreate(newPet);
+    petsCreate(newPet, token);
   }
   const titleText = 'Your new Bolipet!'
   
