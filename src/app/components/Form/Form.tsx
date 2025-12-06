@@ -50,7 +50,7 @@ function RadioQuestion({question, fld_name, images, choices, form, setForm}: Rad
           <label htmlFor={choice_key}>
             {choices[choice_key]['description']}
             {images && choice_key in images && (
-              <img alt={choice_key} src={images[choice_key].src} />
+              <img alt={choice_key} src={images[choice_key]} />
             )}
           </label>
         </span>
@@ -102,7 +102,6 @@ interface FormProps {
 }
 
 export default function Form({ questions, onSubmit, images, setForm }: FormProps) {
-
   return (
     <form className={styles.form}>
       {questions && questions.map((q: questionObj) => {

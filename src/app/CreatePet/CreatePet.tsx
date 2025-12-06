@@ -5,14 +5,18 @@ import type { questionObj } from '../components/Form/Form';
 import PetPreview from '../components/PetPreview/PetPreview';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { pet_images } from '../constants';
+import { pet_images, pet_image_defaults } from '../constants';
 
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
   const [token, setToken] = useState<string>('');
 
   const { user, getAccessTokenSilently } = useAuth0();
-  if (!user) return;
+  // if (!user) return;
+
+  const CreatePetImages = {
+    'species': pet_image_defaults,
+  }
 
   useEffect(() => {
     petsForm()
@@ -29,14 +33,13 @@ export default function CreatePet() {
   
   const submitPet = (formData: FormData) => {
     const newPet = {
-      email: user.email,
-      name: user.name,
+      // email: user.email,
+      // name: user.name,
       ...formData,
     };
     petsCreate(newPet, token);
   }
   const titleText = 'Your new Bolipet!'
-  
   return (
     <div className="m-5 flex flex-col items-center">
       <div>
@@ -45,7 +48,7 @@ export default function CreatePet() {
           <Form
             questions={form}
             onSubmit={submitPet}
-            images={pet_images}
+            images={CreatePetImages}
             setForm={setForm}
           />
           <PetPreview

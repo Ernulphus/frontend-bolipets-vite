@@ -10,16 +10,13 @@ import CreatePet from "./app/CreatePet/CreatePet";
 import Pets from "./app/Pets/Pets";
 
 function App() {
-  const { isLoading, isAuthenticated, error } = useAuth0();
+  const { isAuthenticated, error } = useAuth0();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
-  if (isAuthenticated) {
+  if (true || isAuthenticated) {
     return (
     <BrowserRouter>
       <Navbar />
