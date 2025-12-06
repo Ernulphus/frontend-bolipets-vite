@@ -52,11 +52,9 @@ function Pet(props: PetProps) {
   );
 }
 
-interface Pet {
+export interface Pet {
   Name: string,
   color: string,
-  eye: string,
-  hunger: number
   mood: number,
   species: keyof typeof pet_images,
   _id: string,

@@ -6,13 +6,14 @@ import PetPreview from '../components/PetPreview/PetPreview';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { pet_images, pet_image_defaults } from '../constants';
+import type { Pet } from '../Pets/Pets';
 
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
   const [token, setToken] = useState<string>('');
 
   const { user, getAccessTokenSilently } = useAuth0();
-  // if (!user) return;
+  if (!user) return;
 
   const CreatePetImages = {
     'species': pet_image_defaults,
@@ -31,11 +32,17 @@ export default function CreatePet() {
       .then(setToken);
   }, []);
   
-  const submitPet = (formData: FormData) => {
+  const submitPet = () => {
+    if (!form) return;
+    console.log(form);
+    const pet = Object.fromEntries(
+      form.map((q) => [q.fld_nm, q.value])
+    ) as unknown as Pet;
+    
     const newPet = {
-      // email: user.email,
-      // name: user.name,
-      ...formData,
+      email: user.email,
+      username: user.name,
+      ...pet,
     };
     petsCreate(newPet, token);
   }

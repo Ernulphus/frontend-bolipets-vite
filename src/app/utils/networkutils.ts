@@ -1,5 +1,5 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import type { Pet } from "../Pets/Pets";
 
 const methods: { [key: string]: string } = {
   CREATE: 'create',
@@ -14,8 +14,6 @@ const methods: { [key: string]: string } = {
   PUT: 'put',
 
 };
-
-const HEADERS = 'headers';
 
 const epGroups: { [key: string]: string } = {
   PETS: 'Pets',
@@ -47,7 +45,7 @@ function queryObjToString(queryObj:object | null) {
 
 const petsCreateURL = getURL(epGroups.PETS, methods.CREATE);
 
-const petsCreate = (formData: FormData, token: string) => {
+const petsCreate = (formData: Pet, token: string) => {
   return new Promise((resolve, reject) => {
     axios.post(petsCreateURL, formData, {
       headers: {
