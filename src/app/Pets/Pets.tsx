@@ -57,7 +57,7 @@ export interface Pet {
 interface PetProps {
   petKey?: string,
   pet: Pet,
-  fetchPets: () => void,
+  fetchPets: (token: string) => void,
 }
 
 interface petObject {
