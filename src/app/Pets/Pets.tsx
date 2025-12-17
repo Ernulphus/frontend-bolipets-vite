@@ -26,7 +26,7 @@ function Pet(props: PetProps) {
     petKey: key,
     pet,
    } = props;
-  const { Name, color, eye, hunger, mood, species } = pet;
+  const { Name, color, mood, species } = pet;
   const petSpecies = species;
   return (
     <div key={key} className={style.pet_container} >
@@ -37,12 +37,6 @@ function Pet(props: PetProps) {
         <h2>{Name}</h2>
         <p>
           Color: {color}
-        </p>
-        <p>
-          Eye: {eye}
-        </p>
-        <p>
-          Hunger: {hunger}
         </p>
         <p>
           Mood: {mood}
@@ -106,7 +100,7 @@ export default function Pets() {
         <h1>
           View All Pets
         </h1>
-        <Link href="CreatePet">
+        <Link to="CreatePet">
           <button type="button">
             Add a Pet
           </button>
