@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import style from './Pets.module.css';
  
-import { epGroups, methods, getURL, petsRead } from '../utils/networkutils';
+import { epGroups, methods, getURL, petsRead, AUTH0_AUDIENCE } from '../utils/networkutils';
 import { pet_images } from '../constants';
 import PetPreview from '../components/PetPreview/PetPreview';
 
@@ -87,8 +87,8 @@ export default function Pets() {
   useEffect(() => {
     getAccessTokenSilently({
       authorizationParams: {
-        audience: getURL(epGroups.PETS, methods.READ),
-        scope: 'read:pets',
+        audience: AUTH0_AUDIENCE,
+        scope: 'profile email read:pets',
       },
     })
       .then(fetchPets)

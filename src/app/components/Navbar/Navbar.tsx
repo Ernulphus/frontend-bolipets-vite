@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router';
+import Logout from '../../../lib/Logout';
 
 interface Page {
   label: string;
@@ -34,6 +34,7 @@ function Navbar() {
           PAGES.map(( page ) => <NavLink key={page.destination} page={page} />)
         }
       </ul>
+      <Logout />
     </nav>
   );
 }
