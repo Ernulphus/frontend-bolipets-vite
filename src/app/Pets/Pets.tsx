@@ -100,7 +100,7 @@ export default function Pets() {
         <h1>
           View All Pets
         </h1>
-        <Link to="CreatePet">
+        <Link to="/CreatePet">
           <button type="button">
             Add a Pet
           </button>
