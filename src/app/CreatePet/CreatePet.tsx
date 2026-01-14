@@ -10,6 +10,7 @@ import type { Pet } from '../Pets/Pets';
 
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
+  const [submitted, setSubmitted] = useState(false);
   const [token, setToken] = useState<string>('');
 
   const { user, getAccessTokenSilently } = useAuth0();
@@ -44,7 +45,9 @@ export default function CreatePet() {
       username: user.name,
       ...pet,
     };
-    petsCreate(newPet, token);
+    petsCreate(newPet, token)
+      .then(() => setSubmitted(true))
+      .catch(console.log);
   }
   const titleText = 'Your new Bolipet!'
   return (
@@ -58,6 +61,7 @@ export default function CreatePet() {
             images={CreatePetImages}
             setForm={setForm}
           />
+          {submitted && (<p>Pet created!</p>)}
           <PetPreview
             color={getQuestionValue(form, 'color')}
             pet={getQuestionValue(form, 'species') as keyof typeof pet_images} 
