@@ -43,6 +43,7 @@ export default function CreatePet() {
     const newPet = {
       email: user.email,
       username: user.name,
+      token: token,
       ...pet,
     };
     petsCreate(newPet, token)
