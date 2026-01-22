@@ -74,14 +74,15 @@ function petsObjectToArray(Data: petObject) {
 export default function Pets() {
   const [error, setError] = useState('');
   const [pets, setPets] = useState([] as Pet[]);
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
 
   const fetchPets = (token: string) => {
+    console.log('token', token);
     petsRead(token)
     .then(
       (data) => { setPets(petsObjectToArray(data as petObject)) }
     )
-    .catch((error: string) => setError(`There was a problem retrieving the list of people. ${error}`));
+    .catch((error: string) => setError(`There was a problem retrieving your pets. ${error}`));
   };
   
   useEffect(() => {

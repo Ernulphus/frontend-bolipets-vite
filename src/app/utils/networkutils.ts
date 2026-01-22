@@ -63,7 +63,7 @@ const petsRead = (token: string | null) => {
   return new Promise((resolve, reject) => {
     
     axios.get(getURL(epGroups.PETS, methods.READ),
-    { headers: { Authorization: `Bearer ${token}`} })
+    { headers: { Authorization: `${token}`} })
     .then(({ data }) => resolve(data))
     .catch(reject);
   });
