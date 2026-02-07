@@ -1,0 +1,4 @@
+.create-pet .radio-questions {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}

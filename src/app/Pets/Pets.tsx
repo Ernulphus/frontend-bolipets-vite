@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import style from './Pets.module.css';
  
-import { epGroups, methods, getURL, petsRead, AUTH0_AUDIENCE } from '../utils/networkutils';
+import { petsRead, AUTH0_AUDIENCE } from '../utils/networkutils';
 import { pet_images } from '../constants';
 import PetPreview from '../components/PetPreview/PetPreview';
 

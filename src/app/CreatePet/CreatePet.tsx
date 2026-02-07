@@ -7,6 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import { pet_images, pet_image_defaults } from '../constants';
 import type { Pet } from '../Pets/Pets';
+import './CreatePet.css';
 
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
@@ -49,7 +50,7 @@ export default function CreatePet() {
   }
   const titleText = 'Your new Bolipet!'
   return (
-    <div className="m-5 flex flex-col items-center">
+    <div className="create-pet m-5 flex flex-col items-center">
       <div>
         <h1 className="text-6xl">{titleText}</h1>
         <div className="flex flex-row">

@@ -20,11 +20,13 @@ function App() {
     return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Pets" element={<Pets />} />
-        <Route path="/CreatePet" element={<CreatePet />} />
-      </Routes>
+      <div className="app-body">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Pets" element={<Pets />} />
+          <Route path="/CreatePet" element={<CreatePet />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   )
   } else {

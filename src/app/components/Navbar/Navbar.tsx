@@ -33,8 +33,8 @@ function Navbar() {
         {
           PAGES.map(( page ) => <NavLink key={page.destination} page={page} />)
         }
+        <Logout />
       </ul>
-      <Logout />
     </nav>
   );
 }
