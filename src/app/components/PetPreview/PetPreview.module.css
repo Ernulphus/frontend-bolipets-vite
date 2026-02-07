@@ -15,11 +15,11 @@ div.pet_preview {
 .pet_preview div {
   box-sizing: border-box;
   aspect-ratio: 1;
-  width: 15rem;
+  width: 10rem;
   padding: 0;
 }
 
 .pet_preview img {
   position: relative;
-  top: -15rem;
+  top: -10rem;
 }
