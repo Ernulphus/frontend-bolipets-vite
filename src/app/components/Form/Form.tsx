@@ -18,11 +18,16 @@ interface ShortTextQuestionProps extends QuestionProps {
   defaultText?: string | undefined,
 }
 
-function ShortTextQuestion({question, fld_name, defaultText}: ShortTextQuestionProps) {
+function ShortTextQuestion({question, fld_name, defaultText, form, setForm}: ShortTextQuestionProps) {
   return (
     <div>
       <label htmlFor={fld_name}>{question}</label>
-      <input type="text" name={fld_name} value={defaultText} />
+      <input
+        type="text"
+        name={fld_name}
+        value={defaultText}
+        onChange={(e) => setQuestionValue(form, setForm, fld_name, e.target.value)}
+      />
     </div>
   )
 }
@@ -33,11 +38,11 @@ interface RadioQuestionProps extends QuestionProps {
 
 function RadioQuestion({question, fld_name, images, choices, form, setForm}: RadioQuestionProps) {
   return (
-    <fieldset className={styles.radio_question}>
+    <fieldset className={`radio-questions ${styles.radio_question}`}>
       <legend>{question}</legend>
       {Object.keys(choices).map((choice_key) => (
         <span
-          className="flex flex-row items-center mt-2"
+          className="radio-questions-option"
           key={choice_key}
         >
           <input
@@ -59,10 +64,6 @@ function RadioQuestion({question, fld_name, images, choices, form, setForm}: Rad
   )
 }
 
-// interface ColorWheelProps extends QuestionProps {
-
-// }
-
 function ColorWheelQuestion({ question, fld_name, form, setForm }: QuestionProps) {
   const [hsva, setHsva] = useState({ h: 214, s: 43, v: 90, a: 1 });
 
@@ -74,14 +75,14 @@ function ColorWheelQuestion({ question, fld_name, form, setForm }: QuestionProps
         setHsva(newhsva);
         setQuestionValue(form, setForm, fld_name, hsvaToHex(newhsva));
         }} />
-      <input
+      {/* <input
         type="text"
         id={fld_name}
         name={fld_name}
         readOnly
         value={hsvaToHex(hsva)}
         style={{borderColor: hsvaToHex(hsva)}}
-      />
+      /> */}
     </fieldset>
   );
 }
