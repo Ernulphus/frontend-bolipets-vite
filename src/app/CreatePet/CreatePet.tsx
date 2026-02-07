@@ -1,4 +1,4 @@
-import { petsCreate, petsForm } from '../utils/networkutils';
+import { petsCreate, petsForm, AUTH0_AUDIENCE } from '../utils/networkutils';
 import { useState, useEffect } from 'react';
 import Form, { getQuestionValue } from '../components/Form/Form';
 import type { questionObj } from '../components/Form/Form';
@@ -11,7 +11,6 @@ import type { Pet } from '../Pets/Pets';
 export default function CreatePet() {
   const [form, setForm] = useState<[questionObj] | undefined>();
   const [submitted, setSubmitted] = useState(false);
-  const [token, setToken] = useState<string>('');
 
   const { user, getAccessTokenSilently } = useAuth0();
   if (!user) return;
@@ -23,19 +22,18 @@ export default function CreatePet() {
   useEffect(() => {
     petsForm()
     .then((data) => setForm(data as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
+  }, []);
 
-    getAccessTokenSilently({
+  
+  const submitPet = async () => {
+    if (!form) return;
+    const token = await getAccessTokenSilently({
       authorizationParams: {
-        audience: '',
-        scope: 'create:pets',
+        audience: AUTH0_AUDIENCE,
+        scope: 'openid profile email create:pets',
       },
     })
-      .then(setToken);
-  }, []);
-  
-  const submitPet = () => {
-    if (!form) return;
-    console.log(form);
+
     const pet = Object.fromEntries(
       form.map((q) => [q.fld_nm, q.value])
     ) as unknown as Pet;
@@ -43,7 +41,6 @@ export default function CreatePet() {
     const newPet = {
       email: user.email,
       username: user.name,
-      token: token,
       ...pet,
     };
     petsCreate(newPet, token)

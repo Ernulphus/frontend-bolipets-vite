@@ -51,7 +51,7 @@ const petsCreate = (formData: Pet, token: string) => {
     axios.post(petsCreateURL, formData, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       }
     })
     .then(resolve)
