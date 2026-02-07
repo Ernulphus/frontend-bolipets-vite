@@ -74,10 +74,9 @@ function petsObjectToArray(Data: petObject) {
 export default function Pets() {
   const [error, setError] = useState('');
   const [pets, setPets] = useState([] as Pet[]);
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
   const fetchPets = (token: string) => {
-    console.log('token', token);
     petsRead(token)
     .then(
       (data) => { setPets(petsObjectToArray(data as petObject)) }

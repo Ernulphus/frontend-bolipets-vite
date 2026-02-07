@@ -61,7 +61,7 @@ const petsCreate = (formData: Pet, token: string) => {
 
 const petsRead = (token: string | null) => {
   return new Promise((resolve, reject) => {
-    
+    console.log(getURL(epGroups.PETS, methods.READ));
     axios.get(getURL(epGroups.PETS, methods.READ),
     { headers: { Authorization: `${token}`} })
     .then(({ data }) => resolve(data))
