@@ -20,7 +20,7 @@ const epGroups: { [key: string]: string } = {
   USERS: 'Users',
 };
 
-const BACKEND_URL = (import.meta.env.VITE_PUBLIC_URL_PRE || 'https://bolipets.pythonanywhere.com/');
+const BACKEND_URL = (import.meta.env.VITE_PUBLIC_URL_PRE || 'https://bolipets.pythonanywhere.com');
 const AUTH0_AUDIENCE = (import.meta.env.VITE_APP_AUTH0_AUDIENCE || 'https://bolipets/');
 
 function getURL(group:string, method:string, queryObj?:object | null) {
