@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import './App.css'
 import './global.css';
-import Home from "./app/Home";
+import Home from "./app/Home/Home";
 import LoginSignup from "./lib/LoginSignup";
 import Navbar from "./app/components/Navbar/Navbar";
 import CreatePet from "./app/CreatePet/CreatePet";
