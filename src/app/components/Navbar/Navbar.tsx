@@ -11,8 +11,7 @@ interface NavLinkProps {
 }
 
 const PAGES = [
-  { label: 'Home', destination: '/' },
-  { label: 'Pets', destination: '/Pets' },
+  { label: 'Pets', destination: '/' },
   { label: 'New Pet', destination: '/CreatePet' },
 ];
 

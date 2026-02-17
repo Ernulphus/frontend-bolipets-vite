@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import './App.css'
 import './global.css';
-import Home from "./app/Home/Home";
 import LoginSignup from "./lib/LoginSignup";
 import Navbar from "./app/components/Navbar/Navbar";
 import CreatePet from "./app/CreatePet/CreatePet";
@@ -22,8 +21,7 @@ function App() {
       <Navbar />
       <div className="app-body">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Pets" element={<Pets />} />
+          <Route path="/" element={<Pets />} />
           <Route path="/CreatePet" element={<CreatePet />} />
         </Routes>
       </div>
