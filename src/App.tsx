@@ -3,10 +3,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import './App.css'
 import './global.css';
-import LoginSignup from "./lib/LoginSignup";
 import Navbar from "./app/components/Navbar/Navbar";
 import CreatePet from "./app/CreatePet/CreatePet";
 import Pets from "./app/Pets/Pets";
+import Home from "./app/Home/Home";
 
 function App() {
   const { isAuthenticated, error } = useAuth0();
@@ -28,7 +28,7 @@ function App() {
     </BrowserRouter>
   )
   } else {
-    return <LoginSignup />
+    return <Home />
   }
 
   

@@ -1,11 +1,13 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import LoginSignup from "../../lib/LoginSignup";
+import './Home.css';
 
 export default function Home() {
-  const { user } = useAuth0();
-  if (!user) return <></>
   return (
-    <main>
-      <h1>Welcome, {user.name}!</h1>
+    <main className="loggedout-home">
+      <h1>Bolipets!</h1>
+      <h3>Art by Ali Maza</h3>
+      <h3>Programming and website by Bo Kaufman</h3>
+      <LoginSignup />      
     </main>
   );
 }

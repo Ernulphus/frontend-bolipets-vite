@@ -14,8 +14,15 @@ html {
   --bistre: hsla(10, 31%, 19%, 1);
   --off-white: hsla(45, 29%, 97%, 1);
 
-  --background-color: var(--off-white);
-  --accent-color: var(--cambridge-blue);
+  --espresso: #502419;
+  --frosted-mint: #EFFFC8;
+  --sea-green: #4C934C;
+  --pink-mist: #E08DAC;
+  --dark-amaranth: #6D1A36;
+
+  --background-color: var(--frosted-mint);
+  --accent-color: var(--dark-amaranth);
+  --tertiary-color: var(--pink-mist);
   background-color: var(--background-color);
 }
 
@@ -40,6 +47,7 @@ button {
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
   background: var(--background-color);
+  transition: background 0.2s;
 }
 button:focus,
 button:hover {
@@ -70,6 +78,7 @@ form label {
   width: fit-content;
   position: relative;
   z-index: 1;
+  color: var(--accent-color);
 }
 form label::before,
 form label::after {
@@ -81,7 +90,6 @@ form label::after {
   width: calc(100% + 10px);
   border: 2px solid var(--accent-color);
   border-radius: 5px;
-  background-color: white;
   z-index: -1;
 }
 
