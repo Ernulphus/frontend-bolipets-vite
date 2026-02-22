@@ -91,6 +91,7 @@ form label::after {
   border: 2px solid var(--accent-color);
   border-radius: 5px;
   z-index: -1;
+  background-color: var(--background-color);
 }
 
 form button {
