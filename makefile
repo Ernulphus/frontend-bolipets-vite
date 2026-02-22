@@ -1,8 +1,7 @@
 .PHONY: preview prod
 
 stage:
-	git add .
-	git commit
+	git commit -a
 
 prod-push:
 	git push origin main
