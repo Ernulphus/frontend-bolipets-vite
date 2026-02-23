@@ -1,7 +1,9 @@
 .PHONY: preview prod
 
 stage:
-	git commit -a
+	if ! git diff-index --quiet HEAD; then
+		git commit -a
+	fi
 
 prod-push:
 	git checkout prod
