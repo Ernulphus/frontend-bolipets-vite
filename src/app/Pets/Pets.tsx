@@ -26,21 +26,26 @@ function Pet(props: PetProps) {
     petKey: key,
     pet,
    } = props;
-  const { Name, color, mood, species } = pet;
-  const petSpecies = species;
+  const { Name } = pet;
+  const dispFields: (keyof Pet)[] = [
+    'color',
+    'mood',
+    'species',
+  ];
+  const petSpecies = pet.species;
   return (
     <div key={key} className={style.pet_container} >
-      {species in pet_images && 
-        <PetPreview color={color} pet={petSpecies} />
+      {pet.species in pet_images && 
+        <PetPreview color={pet.color} pet={petSpecies} />
       }
       <div>
         <h2>{Name}</h2>
-        <p>
-          Color: {color}
-        </p>
-        <p>
-          Mood: {mood}
-        </p>
+        {dispFields.map((fld) => {
+          if (pet[fld]) return (
+          <p>
+            {fld}: {pet[fld]}
+          </p>
+        )})}
       </div>
     </div>
   );
