@@ -1,5 +1,8 @@
 .PHONY: preview prod
 
+tests:
+	npx vitest run
+
 stage:
 	git diff-index --quiet HEAD || git commit -a
 
@@ -9,9 +12,9 @@ prod-push:
 	git push origin prod
 	git checkout main
 
-prod: stage prod-push
+prod: tests stage prod-push
 
 preview-push:
 	git push origin main
 
-preview: stage preview-push
+preview: tests stage preview-push
