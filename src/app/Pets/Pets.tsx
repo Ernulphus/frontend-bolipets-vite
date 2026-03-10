@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
-import style from "./Pets.module.css";
+import style from './Pets.module.css';
 
-import { petsRead, AUTH0_AUDIENCE } from "../utils/networkutils";
-import { pet_images } from "../constants";
-import PetPreview from "../components/PetPreview/PetPreview";
+import { petsRead, AUTH0_AUDIENCE } from '../utils/networkutils';
+import { pet_images } from '../constants';
+import PetPreview from '../components/PetPreview/PetPreview';
 
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 
 function ErrorMessage(props: ErrorMessageProps) {
 	const { message } = props;
@@ -20,7 +20,7 @@ interface ErrorMessageProps {
 function Pet(props: PetProps) {
 	const { petKey: key, pet } = props;
 	const { Name } = pet;
-	const dispFields: (keyof Pet)[] = ["color", "mood", "species"];
+	const dispFields: (keyof Pet)[] = ['color', 'mood', 'species'];
 	const petSpecies = pet.species;
 	return (
 		<div key={key} className={style.pet_container}>
@@ -67,7 +67,7 @@ function petsObjectToArray(Data: petObject) {
 }
 
 export default function Pets() {
-	const [error, setError] = useState("");
+	const [error, setError] = useState('');
 	const [pets, setPets] = useState([] as Pet[]);
 	const { getAccessTokenSilently } = useAuth0();
 
@@ -85,7 +85,7 @@ export default function Pets() {
 		getAccessTokenSilently({
 			authorizationParams: {
 				audience: AUTH0_AUDIENCE,
-				scope: "profile email read:pets",
+				scope: 'profile email read:pets',
 			},
 		}).then(fetchPets);
 	}, []);
@@ -101,8 +101,8 @@ export default function Pets() {
 			{error && <ErrorMessage message={error} />}
 			{pets.map((pet) => (
 				<Pet
-					key={pet["_id"]}
-					petKey={pet["_id"]}
+					key={pet['_id']}
+					petKey={pet['_id']}
 					pet={pet}
 					fetchPets={fetchPets}
 				/>

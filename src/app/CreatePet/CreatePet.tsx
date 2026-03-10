@@ -1,13 +1,13 @@
-import { petsCreate, petsForm, AUTH0_AUDIENCE } from "../utils/networkutils";
-import { useState, useEffect } from "react";
-import Form, { getQuestionValue } from "../components/Form/Form";
-import type { questionObj } from "../components/Form/Form";
-import PetPreview from "../components/PetPreview/PetPreview";
-import { useAuth0 } from "@auth0/auth0-react";
+import { petsCreate, petsForm, AUTH0_AUDIENCE } from '../utils/networkutils';
+import { useState, useEffect } from 'react';
+import Form, { getQuestionValue } from '../components/Form/Form';
+import type { questionObj } from '../components/Form/Form';
+import PetPreview from '../components/PetPreview/PetPreview';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import { pet_images, pet_image_defaults } from "../constants";
-import type { Pet } from "../Pets/Pets";
-import "./CreatePet.css";
+import { type pet_images, pet_image_defaults } from '../constants';
+import type { Pet } from '../Pets/Pets';
+import './CreatePet.css';
 
 export default function CreatePet() {
 	const [form, setForm] = useState<[questionObj] | undefined>();
@@ -29,7 +29,7 @@ export default function CreatePet() {
 		const token = await getAccessTokenSilently({
 			authorizationParams: {
 				audience: AUTH0_AUDIENCE,
-				scope: "openid profile email create:pets",
+				scope: 'openid profile email create:pets',
 			},
 		});
 
@@ -46,7 +46,7 @@ export default function CreatePet() {
 			.then(() => setSubmitted(true))
 			.catch(console.log);
 	};
-	const titleText = "Your new Bolipet!";
+	const titleText = 'Your new Bolipet!';
 	return (
 		<div className="create-pet m-5 flex flex-col items-center">
 			<div>
@@ -60,8 +60,8 @@ export default function CreatePet() {
 					/>
 					{submitted && <p>Pet created!</p>}
 					<PetPreview
-						color={getQuestionValue(form, "color")}
-						pet={getQuestionValue(form, "species") as keyof typeof pet_images}
+						color={getQuestionValue(form, 'color')}
+						pet={getQuestionValue(form, 'species') as keyof typeof pet_images}
 					/>
 				</div>
 			</div>

@@ -1,5 +1,5 @@
-import styles from "./PetPreview.module.css";
-import { pet_images } from "../../constants";
+import styles from './PetPreview.module.css';
+import { pet_images } from '../../constants';
 
 type petImages = typeof pet_images;
 

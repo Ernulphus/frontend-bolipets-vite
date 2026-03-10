@@ -1,5 +1,8 @@
 .PHONY: preview prod
 
+lint:
+	npm run lint
+
 tests:
 	npx vitest run
 

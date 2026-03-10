@@ -1,5 +1,5 @@
-import LoginSignup from "../../lib/LoginSignup";
-import "./Home.css";
+import LoginSignup from '../../lib/LoginSignup';
+import './Home.css';
 
 export default function Home() {
 	return (

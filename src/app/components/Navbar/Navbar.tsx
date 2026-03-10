@@ -1,5 +1,5 @@
-import { Link } from "react-router";
-import Logout from "../../../lib/Logout";
+import { Link } from 'react-router';
+import Logout from '../../../lib/Logout';
 
 interface Page {
 	label: string;
@@ -11,8 +11,8 @@ interface NavLinkProps {
 }
 
 const PAGES = [
-	{ label: "Pets", destination: "/" },
-	{ label: "New Pet", destination: "/CreatePet" },
+	{ label: 'Pets', destination: '/' },
+	{ label: 'New Pet', destination: '/CreatePet' },
 ];
 
 function NavLink(props: NavLinkProps) {

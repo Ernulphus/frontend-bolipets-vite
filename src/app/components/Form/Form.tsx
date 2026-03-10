@@ -1,10 +1,10 @@
-import { useState } from "react";
-import type { Dispatch } from "react";
+import { useState } from 'react';
+import type { Dispatch } from 'react';
 
-import Wheel from "@uiw/react-color-wheel";
-import { hsvaToHex } from "@uiw/color-convert";
+import Wheel from '@uiw/react-color-wheel';
+import { hsvaToHex } from '@uiw/color-convert';
 
-import styles from "./Form.module.css";
+import styles from './Form.module.css';
 
 interface QuestionProps {
 	question: string;
@@ -67,7 +67,7 @@ function RadioQuestion({
 						}
 					/>
 					<label htmlFor={choice_key}>
-						{choices[choice_key]["description"]}
+						{choices[choice_key]['description']}
 						{images && choice_key in images && (
 							<img alt={choice_key} src={images[choice_key]} />
 						)}
@@ -135,7 +135,7 @@ export default function Form({
 			{questions &&
 				questions.map((q: questionObj) => {
 					switch (q.param_type) {
-						case "radio":
+						case 'radio':
 							if (!q.choices) return <div />;
 							return (
 								<RadioQuestion
@@ -148,7 +148,7 @@ export default function Form({
 									setForm={setForm}
 								/>
 							);
-						case "color_wheel":
+						case 'color_wheel':
 							return (
 								<ColorWheelQuestion
 									fld_name={q.fld_nm}
@@ -186,8 +186,8 @@ export function getQuestionValue(
 	fld_nm: string,
 ) {
 	if (!fld_nm || !form) return;
-	const filtered = form.filter((q) => q["fld_nm"] == fld_nm);
-	if (filtered.length > 0) return filtered[0]["value"];
+	const filtered = form.filter((q) => q['fld_nm'] == fld_nm);
+	if (filtered.length > 0) return filtered[0]['value'];
 	return undefined;
 }
 
@@ -199,8 +199,8 @@ function setQuestionValue(
 ) {
 	if (!form) return undefined;
 	form.forEach((q) => {
-		if (q["fld_nm"] == fld_nm) {
-			q["value"] = value;
+		if (q['fld_nm'] == fld_nm) {
+			q['value'] = value;
 		}
 	});
 	setForm([...form]);
