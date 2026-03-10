@@ -66,7 +66,7 @@ function RadioQuestion({
 						}
 					/>
 					<label htmlFor={choice_key}>
-						{choices[choice_key]['description']}
+						{choices[choice_key].description}
 						{images && choice_key in images && (
 							<img alt={choice_key} src={images[choice_key]} />
 						)}
@@ -131,46 +131,45 @@ export default function Form({
 }: FormProps) {
 	return (
 		<form className={styles.form}>
-			{questions &&
-				questions.map((q: questionObj) => {
-					switch (q.param_type) {
-						case 'radio':
-							if (!q.choices) return <div />;
-							return (
-								<RadioQuestion
-									fld_name={q.fld_nm}
-									question={q.question}
-									choices={q.choices}
-									key={q.fld_nm}
-									images={images[q.fld_nm]}
-									form={questions}
-									setForm={setForm}
-								/>
-							);
-						case 'color_wheel':
-							return (
-								<ColorWheelQuestion
-									fld_name={q.fld_nm}
-									question={q.question}
-									key={q.fld_nm}
-									images={images[q.fld_nm]}
-									form={questions}
-									setForm={setForm}
-								/>
-							);
-						default:
-							return (
-								<ShortTextQuestion
-									fld_name={q.fld_nm}
-									question={q.question}
-									key={q.fld_nm}
-									images={images[q.fld_nm]}
-									form={questions}
-									setForm={setForm}
-								/>
-							);
-					}
-				})}
+			{questions?.map((q: questionObj) => {
+				switch (q.param_type) {
+					case 'radio':
+						if (!q.choices) return <div />;
+						return (
+							<RadioQuestion
+								fld_name={q.fld_nm}
+								question={q.question}
+								choices={q.choices}
+								key={q.fld_nm}
+								images={images[q.fld_nm]}
+								form={questions}
+								setForm={setForm}
+							/>
+						);
+					case 'color_wheel':
+						return (
+							<ColorWheelQuestion
+								fld_name={q.fld_nm}
+								question={q.question}
+								key={q.fld_nm}
+								images={images[q.fld_nm]}
+								form={questions}
+								setForm={setForm}
+							/>
+						);
+					default:
+						return (
+							<ShortTextQuestion
+								fld_name={q.fld_nm}
+								question={q.question}
+								key={q.fld_nm}
+								images={images[q.fld_nm]}
+								form={questions}
+								setForm={setForm}
+							/>
+						);
+				}
+			})}
 			<input
 				className={styles.submit_button}
 				type="submit"
@@ -185,8 +184,8 @@ export function getQuestionValue(
 	fld_nm: string,
 ) {
 	if (!fld_nm || !form) return;
-	const filtered = form.filter((q) => q['fld_nm'] === fld_nm);
-	if (filtered.length > 0) return filtered[0]['value'];
+	const filtered = form.filter((q) => q.fld_nm === fld_nm);
+	if (filtered.length > 0) return filtered[0].value;
 	return undefined;
 }
 
@@ -194,12 +193,13 @@ function setQuestionValue(
 	form: [questionObj] | undefined,
 	setForm: Dispatch<[questionObj] | undefined>,
 	fld_nm: string,
-	value: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: I want to keep this open to any form value I might want in the future.
+	value: any,
 ) {
 	if (!form) return undefined;
 	form.forEach((q) => {
-		if (q['fld_nm'] === fld_nm) {
-			q['value'] = value;
+		if (q.fld_nm === fld_nm) {
+			q.value = value;
 		}
 	});
 	setForm([...form]);

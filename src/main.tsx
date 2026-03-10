@@ -1,9 +1,10 @@
+import { Auth0Provider } from '@auth0/auth0-react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { Auth0Provider } from '@auth0/auth0-react';
 import { AUTH0_AUDIENCE } from './app/utils/networkutils.ts';
 
+// biome-ignore lint/style/noNonNullAssertion: This forbidden non-null assertion came as boilerplate with vite. I don't want to mess with it.
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<Auth0Provider

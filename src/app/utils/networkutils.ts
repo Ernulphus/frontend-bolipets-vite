@@ -40,7 +40,7 @@ function queryObjToString(queryObj: object | null) {
 	if (!queryObj) return '';
 	let queryString = '?';
 	Object.entries(queryObj).forEach((key, value) => {
-		queryString += key + '=' + value.toString() + '&';
+		queryString += `${key}=${value.toString()}&`;
 	});
 	return queryString;
 }

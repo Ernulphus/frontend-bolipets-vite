@@ -19,7 +19,8 @@ export default function CreatePet() {
 	};
 
 	useEffect(() => {
-		petsForm().then((data) => setForm(data as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
+		// biome-ignore lint/suspicious/noExplicitAny: This formdata needs to stay open and flexible. Maybe look at later.
+		petsForm().then((data) => setForm(data as any));
 	}, []);
 
 	if (!user) return;

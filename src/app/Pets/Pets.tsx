@@ -98,12 +98,7 @@ export default function Pets() {
 			</header>
 			{error && <ErrorMessage message={error} />}
 			{pets.map((pet) => (
-				<Pet
-					key={pet['_id']}
-					petKey={pet['_id']}
-					pet={pet}
-					fetchPets={fetchPets}
-				/>
+				<Pet key={pet._id} petKey={pet._id} pet={pet} fetchPets={fetchPets} />
 			))}
 		</div>
 	);
