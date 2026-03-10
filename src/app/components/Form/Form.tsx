@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import type { Dispatch } from 'react';
-
-import Wheel from '@uiw/react-color-wheel';
 import { hsvaToHex } from '@uiw/color-convert';
+import Wheel from '@uiw/react-color-wheel';
+import type { Dispatch } from 'react';
+import { useState } from 'react';
 
 import styles from './Form.module.css';
 
@@ -186,7 +185,7 @@ export function getQuestionValue(
 	fld_nm: string,
 ) {
 	if (!fld_nm || !form) return;
-	const filtered = form.filter((q) => q['fld_nm'] == fld_nm);
+	const filtered = form.filter((q) => q['fld_nm'] === fld_nm);
 	if (filtered.length > 0) return filtered[0]['value'];
 	return undefined;
 }
@@ -199,7 +198,7 @@ function setQuestionValue(
 ) {
 	if (!form) return undefined;
 	form.forEach((q) => {
-		if (q['fld_nm'] == fld_nm) {
+		if (q['fld_nm'] === fld_nm) {
 			q['value'] = value;
 		}
 	});

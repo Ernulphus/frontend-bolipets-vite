@@ -5,6 +5,7 @@ export default function LoginSignup() {
 	const { loginWithRedirect } = useAuth0();
 	return (
 		<button
+			type="button"
 			onClick={() =>
 				loginWithRedirect({
 					authorizationParams: {

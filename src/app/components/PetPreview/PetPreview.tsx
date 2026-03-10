@@ -1,5 +1,5 @@
-import styles from './PetPreview.module.css';
 import { pet_images } from '../../constants';
+import styles from './PetPreview.module.css';
 
 type petImages = typeof pet_images;
 
@@ -23,7 +23,7 @@ export default function PetPreview<K extends keyof petImages>({
 					WebkitMaskImage: defaultImageURL,
 				}}
 			/>
-			<img src={pet_images[pet].TRANSPARENT} />
+			<img alt={pet} src={pet_images[pet].TRANSPARENT} />
 		</div>
 	);
 }

@@ -1,12 +1,11 @@
-import { petsCreate, petsForm, AUTH0_AUDIENCE } from '../utils/networkutils';
-import { useState, useEffect } from 'react';
-import Form, { getQuestionValue } from '../components/Form/Form';
-import type { questionObj } from '../components/Form/Form';
-import PetPreview from '../components/PetPreview/PetPreview';
 import { useAuth0 } from '@auth0/auth0-react';
-
-import { type pet_images, pet_image_defaults } from '../constants';
+import { useEffect, useState } from 'react';
+import type { questionObj } from '../components/Form/Form';
+import Form, { getQuestionValue } from '../components/Form/Form';
+import PetPreview from '../components/PetPreview/PetPreview';
+import { pet_image_defaults, type pet_images } from '../constants';
 import type { Pet } from '../Pets/Pets';
+import { AUTH0_AUDIENCE, petsCreate, petsForm } from '../utils/networkutils';
 import './CreatePet.css';
 
 export default function CreatePet() {
@@ -14,7 +13,6 @@ export default function CreatePet() {
 	const [submitted, setSubmitted] = useState(false);
 
 	const { user, getAccessTokenSilently } = useAuth0();
-	if (!user) return;
 
 	const CreatePetImages = {
 		species: pet_image_defaults,
@@ -23,6 +21,8 @@ export default function CreatePet() {
 	useEffect(() => {
 		petsForm().then((data) => setForm(data as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
 	}, []);
+
+	if (!user) return;
 
 	const submitPet = async () => {
 		if (!form) return;
