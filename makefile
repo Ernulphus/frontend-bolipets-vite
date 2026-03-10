@@ -1,4 +1,4 @@
-.PHONY: preview prod
+.PHONY: commit preview prod all
 
 lint:
 	npm run lint
@@ -8,6 +8,8 @@ tests:
 
 stage:
 	git diff-index --quiet HEAD || git commit -a
+
+commit: stage
 
 prod-push:
 	git checkout prod
@@ -21,3 +23,5 @@ preview-push:
 	git push origin main
 
 preview: tests stage preview-push
+
+all: preview prod
