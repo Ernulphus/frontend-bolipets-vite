@@ -24,4 +24,4 @@ preview-push:
 
 preview: tests stage preview-push
 
-all: preview prod
+all: tests stage preview-push prod-push
