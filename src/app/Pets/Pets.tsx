@@ -77,7 +77,7 @@ export default function Pets() {
 			.catch((error: string) =>
 				setError(`There was a problem retrieving your pets. ${error}`),
 			);
-	});
+	}, []);
 
 	useEffect(() => {
 		getAccessTokenSilently({
