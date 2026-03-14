@@ -1,11 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import {
-	type Dispatch,
-	type SetStateAction,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import PetPreview from '../components/PetPreview/PetPreview';
 import { pet_images } from '../constants';
