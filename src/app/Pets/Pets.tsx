@@ -1,5 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { useCallback, useEffect, useState } from 'react';
+import {
+	type Dispatch,
+	type SetStateAction,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { Link } from 'react-router';
 import PetPreview from '../components/PetPreview/PetPreview';
 import { pet_images } from '../constants';
@@ -48,6 +54,30 @@ export interface Pet {
 	_id: string;
 }
 
+function PetList(props: petDisplayListProps) {
+	const { error, pets, loaded, fetchPets } = props;
+	if (error) return <ErrorMessage message={error} />;
+	if (!loaded) return <p>Loading pets...</p>;
+	if (!pets.length)
+		return (
+			<div>
+				<h2>No pets found.</h2>
+				<Link to="/createPet">Adopt one now!</Link>
+			</div>
+		);
+
+	return pets.map((pet) => (
+		<Pet key={pet._id} petKey={pet._id} pet={pet} fetchPets={fetchPets} />
+	));
+}
+
+interface petDisplayListProps {
+	error: string;
+	pets: Pet[];
+	loaded: boolean;
+	fetchPets: (token: string) => void;
+}
+
 interface PetProps {
 	petKey?: string;
 	pet: Pet;
@@ -67,12 +97,14 @@ function petsObjectToArray(Data: petObject) {
 export default function Pets() {
 	const [error, setError] = useState('');
 	const [pets, setPets] = useState([] as Pet[]);
+	const [loaded, setLoaded] = useState(false);
 	const { getAccessTokenSilently } = useAuth0();
 
 	const fetchPets = useCallback((token: string) => {
 		petsRead(token)
 			.then((data) => {
 				setPets(petsObjectToArray(data as petObject));
+				setLoaded(true);
 			})
 			.catch((error: string) =>
 				setError(`There was a problem retrieving your pets. ${error}`),
@@ -85,7 +117,11 @@ export default function Pets() {
 				audience: AUTH0_AUDIENCE,
 				scope: 'profile email read:pets',
 			},
-		}).then(fetchPets);
+		})
+			.then(fetchPets)
+			.catch((error: string) =>
+				setError(`There was a problem authorizing you. ${error}`),
+			);
 	}, [getAccessTokenSilently, fetchPets]);
 
 	return (
@@ -96,10 +132,12 @@ export default function Pets() {
 					<button type="button">Add a Pet</button>
 				</Link>
 			</header>
-			{error && <ErrorMessage message={error} />}
-			{pets.map((pet) => (
-				<Pet key={pet._id} petKey={pet._id} pet={pet} fetchPets={fetchPets} />
-			))}
+			<PetList
+				error={error}
+				pets={pets}
+				loaded={loaded}
+				fetchPets={fetchPets}
+			/>
 		</div>
 	);
 }
