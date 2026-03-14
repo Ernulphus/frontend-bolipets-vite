@@ -3,7 +3,6 @@
 lint:
 	npm run lint
 
-
 tests:
 	npx vitest run
 
@@ -21,11 +20,11 @@ prod-push:
 	git push origin prod
 	git checkout main
 
-prod: tests stage prod-push
+prod: lint tests stage prod-push
 
 preview-push:
 	git push origin main
 
-preview: tests stage preview-push
+preview: lint tests stage preview-push
 
-all: tests stage preview-push prod-push
+all: lint tests stage preview-push prod-push
