@@ -3,8 +3,12 @@
 lint:
 	npm run lint
 
+
 tests:
 	npx vitest run
+
+continuous_tests:
+	npm run test
 
 stage:
 	git diff-index --quiet HEAD || git commit -a
