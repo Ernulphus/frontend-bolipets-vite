@@ -2,3 +2,15 @@
 	display: grid;
 	grid-template-columns: 25% 25% 25% 25%;
 }
+
+@media (max-width: 850px) {
+	.create-pet .radio-questions {
+		grid-template-columns: 50% 50%;
+	}
+}
+
+@media (max-width: 450px) {
+	.create-pet .radio-questions {
+		grid-template-columns: 100%;
+	}
+}
