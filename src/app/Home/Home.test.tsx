@@ -16,4 +16,8 @@ describe('Home', () => {
 		const login = screen.getByRole('button', { name: /log in/i });
 		expect(login).toBeInTheDocument();
 	});
+	it('matches snapshot', async () => {
+		const main = screen.getByRole('main');
+		await expect(main).toMatchSnapshot();
+	});
 });
