@@ -1,5 +1,5 @@
 .pet_container {
-	margin: 2rem 0;
+	margin: 1rem 0;
 	padding: 10px;
 	display: flex;
 	flex-direction: row;
@@ -19,4 +19,18 @@
 	aspect-ratio: 1 / 1;
 	width: 10rem;
 	border-radius: 5px;
+}
+
+@media (max-width: 850px) {
+	.pet_container {
+		flex-direction: column-reverse;
+		align-items: center;
+		justify-content: space-around;
+	}
+}
+
+@media (max-width: 450px) {
+	.pet_container {
+		outline: none;
+	}
 }
