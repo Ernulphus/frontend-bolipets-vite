@@ -18,21 +18,32 @@ const epGroups: { [key: string]: string } = {
 	PETS: 'Pets',
 	USERS: 'Users',
 };
+const epSubgroups: { [key: string]: string } = {
+	DISOWN: 'disown',
+	ADOPT: 'adopt',
+};
 
 const BACKEND_URL =
 	import.meta.env.VITE_PUBLIC_URL_PRE || 'https://bolipets.pythonanywhere.com';
 const AUTH0_AUDIENCE =
 	import.meta.env.VITE_APP_AUTH0_AUDIENCE || 'https://bolipets/';
 
-function getURL(group: string, method: string, queryObj?: object | null) {
+function getURL(
+	group: string,
+	method: string,
+	subgroup?: string | null,
+	queryObj?: object | null,
+) {
 	if (!BACKEND_URL) throw new Error('No base URL');
 	if (!Object.values(epGroups).includes(group))
 		throw new Error('Endpoint group not found');
 	if (!Object.values(methods).includes(method))
 		throw new Error('Invalid method');
 	const queryString = queryObj ? queryObjToString(queryObj) : '';
-
-	const url = `${BACKEND_URL}/${group}/${method}${queryString}`;
+	if (subgroup && !Object.values(epSubgroups).includes(subgroup))
+		throw new Error('Endpoint subgroup not found');
+	const subgroupString = subgroup ? `${subgroup}/` : '';
+	const url = `${BACKEND_URL}/${group}/${subgroupString}${method}${queryString}`;
 	return url;
 }
 
@@ -89,6 +100,26 @@ const petsDelete = (_id: string) => {
 	});
 };
 
+const petDisownURL = getURL(epGroups.PETS, methods.POST, epSubgroups.DISOWN);
+
+const petDisown = (token: string | null, id: string) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(
+				petDisownURL,
+				{ id: id },
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `${token}`,
+					},
+				},
+			)
+			.then(resolve)
+			.catch(reject);
+	});
+};
+
 export {
 	AUTH0_AUDIENCE,
 	epGroups,
@@ -98,4 +129,5 @@ export {
 	petsRead,
 	petsForm,
 	petsDelete,
+	petDisown,
 };
