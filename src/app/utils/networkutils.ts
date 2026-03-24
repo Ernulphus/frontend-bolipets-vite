@@ -12,16 +12,16 @@ const methods: { [key: string]: string } = {
 	GET: 'get',
 	POST: 'post',
 	PUT: 'put',
+
+	DISOWN: 'disown',
+	ADOPT: 'adopt',
 };
 
 const epGroups: { [key: string]: string } = {
 	PETS: 'Pets',
 	USERS: 'Users',
 };
-const epSubgroups: { [key: string]: string } = {
-	DISOWN: 'disown',
-	ADOPT: 'adopt',
-};
+const epSubgroups: { [key: string]: string } = {};
 
 const BACKEND_URL =
 	import.meta.env.VITE_PUBLIC_URL_PRE || 'https://bolipets.pythonanywhere.com';
@@ -100,7 +100,7 @@ const petsDelete = (_id: string) => {
 	});
 };
 
-const petDisownURL = getURL(epGroups.PETS, methods.POST, epSubgroups.DISOWN);
+const petDisownURL = getURL(epGroups.PETS, methods.DISOWN);
 
 const petDisown = (token: string | null, id: string) => {
 	return new Promise((resolve, reject) => {

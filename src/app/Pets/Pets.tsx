@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import PetPreview from '../components/PetPreview/PetPreview';
 import { pet_images } from '../constants';
-import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
+import { AUTH0_AUDIENCE, petDisown, petsRead } from '../utils/networkutils';
 import style from './Pets.module.css';
 
 function ErrorMessage(props: ErrorMessageProps) {
@@ -15,10 +15,15 @@ interface ErrorMessageProps {
 }
 
 function Pet(props: PetProps) {
-	const { petKey: key, pet } = props;
-	const { Name } = pet;
+	const { petKey: key, pet, token, fetchPets } = props;
+	const { Name, _id: id } = pet;
 	const dispFields: (keyof Pet)[] = ['color', 'mood', 'species'];
 	const petSpecies = pet.species;
+	const disownPet = () => {
+		petDisown(token, id).then(() => {
+			fetchPets(token);
+		});
+	};
 	return (
 		<div key={key} className={style.pet_container}>
 			{pet.species in pet_images && (
@@ -35,6 +40,9 @@ function Pet(props: PetProps) {
 							</p>
 						);
 					})}
+				<button type="button" onClick={disownPet}>
+					Disown
+				</button>
 			</div>
 		</div>
 	);
@@ -49,7 +57,7 @@ export interface Pet {
 }
 
 function PetList(props: petDisplayListProps) {
-	const { error, pets, loaded, fetchPets } = props;
+	const { error, pets, loaded, fetchPets, token } = props;
 	if (error) return <ErrorMessage message={error} />;
 	if (!loaded) return <p>Loading pets...</p>;
 	if (!pets.length)
@@ -61,7 +69,13 @@ function PetList(props: petDisplayListProps) {
 		);
 
 	return pets.map((pet) => (
-		<Pet key={pet._id} petKey={pet._id} pet={pet} fetchPets={fetchPets} />
+		<Pet
+			key={pet._id}
+			petKey={pet._id}
+			pet={pet}
+			fetchPets={fetchPets}
+			token={token}
+		/>
 	));
 }
 
@@ -70,12 +84,14 @@ interface petDisplayListProps {
 	pets: Pet[];
 	loaded: boolean;
 	fetchPets: (token: string) => void;
+	token: string;
 }
 
 interface PetProps {
 	petKey?: string;
 	pet: Pet;
 	fetchPets: (token: string) => void;
+	token: string;
 }
 
 interface petObject {
@@ -91,6 +107,7 @@ function petsObjectToArray(Data: petObject) {
 export default function Pets() {
 	const [error, setError] = useState('');
 	const [pets, setPets] = useState([] as Pet[]);
+	const [token, setToken] = useState('');
 	const [loaded, setLoaded] = useState(false);
 	const { getAccessTokenSilently } = useAuth0();
 
@@ -112,7 +129,10 @@ export default function Pets() {
 				scope: 'profile email read:pets',
 			},
 		})
-			.then(fetchPets)
+			.then((userData) => {
+				fetchPets(userData);
+				setToken(userData);
+			})
 			.catch((error: string) =>
 				setError(`There was a problem authorizing you. ${error}`),
 			);
@@ -131,6 +151,7 @@ export default function Pets() {
 				pets={pets}
 				loaded={loaded}
 				fetchPets={fetchPets}
+				token={token}
 			/>
 		</div>
 	);
