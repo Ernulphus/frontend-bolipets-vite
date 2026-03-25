@@ -128,6 +128,24 @@ const petAdopteeRead = () => {
 	});
 };
 
+const petAdopt = (token: string | null, id: string) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(
+				getURL(epGroups.PETS, methods.ADOPT),
+				{ id: id },
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `${token}`,
+					},
+				},
+			)
+			.then(resolve)
+			.catch(reject);
+	});
+};
+
 export {
 	AUTH0_AUDIENCE,
 	epGroups,
@@ -137,6 +155,7 @@ export {
 	petsRead,
 	petsForm,
 	petsDelete,
+	petAdopt,
 	petDisown,
 	petAdopteeRead,
 };
