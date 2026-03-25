@@ -64,7 +64,8 @@ function PetList(props: petDisplayListProps) {
 		return (
 			<div>
 				<h2>No pets found.</h2>
-				<Link to="/createPet">Adopt one now!</Link>
+				<Link to="/createPet">Create one</Link> or{' '}
+				<Link to="/pound">adopt one now!</Link>
 			</div>
 		);
 

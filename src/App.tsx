@@ -1,12 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
 import { useAuth0 } from '@auth0/auth0-react';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
 import './App.css';
 import './global.css';
-import Navbar from './app/components/Navbar/Navbar';
 import CreatePet from './app/CreatePet/CreatePet';
-import Pets from './app/Pets/Pets';
+import Navbar from './app/components/Navbar/Navbar';
 import Home from './app/Home/Home';
+import Pets from './app/Pets/Pets';
+import Pound from './app/Pound/Pound';
 
 function App() {
 	const { isAuthenticated, error } = useAuth0();
@@ -23,6 +24,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Pets />} />
 						<Route path="/CreatePet" element={<CreatePet />} />
+						<Route path="/Pound" element={<Pound />} />
 					</Routes>
 				</div>
 			</BrowserRouter>
