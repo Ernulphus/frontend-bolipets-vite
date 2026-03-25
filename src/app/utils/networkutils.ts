@@ -74,7 +74,6 @@ const petsCreate = (formData: Pet, token: string) => {
 
 const petsRead = (token: string | null) => {
 	return new Promise((resolve, reject) => {
-		console.log(getURL(epGroups.PETS, methods.READ));
 		axios
 			.get(getURL(epGroups.PETS, methods.READ), {
 				headers: { Authorization: `${token}` },
@@ -120,6 +119,15 @@ const petDisown = (token: string | null, id: string) => {
 	});
 };
 
+const petAdopteeRead = () => {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(getURL(epGroups.PETS, methods.READ, methods.DISOWN))
+			.then(({ data }) => resolve(data))
+			.catch(reject);
+	});
+};
+
 export {
 	AUTH0_AUDIENCE,
 	epGroups,
@@ -130,4 +138,5 @@ export {
 	petsForm,
 	petsDelete,
 	petDisown,
+	petAdopteeRead,
 };
