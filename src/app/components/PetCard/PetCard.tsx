@@ -1,4 +1,5 @@
 import { pet_images } from '../../constants';
+import { petDisown } from '../../utils/networkutils';
 import PetPreview from '../PetPreview/PetPreview';
 import style from './PetCard.module.css';
 

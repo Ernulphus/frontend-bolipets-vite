@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import PetCard, { type Pet } from '../components/PetCard/PetCard';
-import { AUTH0_AUDIENCE, petDisown, petsRead } from '../utils/networkutils';
+import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
 
 function ErrorMessage(props: ErrorMessageProps) {
 	const { message } = props;
