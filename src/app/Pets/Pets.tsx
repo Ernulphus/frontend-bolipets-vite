@@ -1,10 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import PetPreview from '../components/PetPreview/PetPreview';
-import { pet_images } from '../constants';
+import PetCard, { type Pet } from '../components/PetCard/PetCard';
 import { AUTH0_AUDIENCE, petDisown, petsRead } from '../utils/networkutils';
-import style from './Pets.module.css';
 
 function ErrorMessage(props: ErrorMessageProps) {
 	const { message } = props;
@@ -12,48 +10,6 @@ function ErrorMessage(props: ErrorMessageProps) {
 }
 interface ErrorMessageProps {
 	message: string;
-}
-
-function Pet(props: PetProps) {
-	const { petKey: key, pet, token, fetchPets } = props;
-	const { Name, _id: id } = pet;
-	const dispFields: (keyof Pet)[] = ['color', 'mood', 'species'];
-	const petSpecies = pet.species;
-	const disownPet = () => {
-		petDisown(token, id).then(() => {
-			fetchPets(token);
-		});
-	};
-	return (
-		<div key={key} className={style.pet_container}>
-			{pet.species in pet_images && (
-				<PetPreview color={pet.color} pet={petSpecies} />
-			)}
-			<div>
-				<h2>{Name}</h2>
-				{dispFields
-					.filter((fld) => pet[fld])
-					.map((fld) => {
-						return (
-							<p key={pet[fld]}>
-								{fld}: {pet[fld]}
-							</p>
-						);
-					})}
-				<button type="button" onClick={disownPet}>
-					Disown
-				</button>
-			</div>
-		</div>
-	);
-}
-
-export interface Pet {
-	Name: string;
-	color: string;
-	mood: number;
-	species: keyof typeof pet_images;
-	_id: string;
 }
 
 function PetList(props: petDisplayListProps) {
@@ -70,7 +26,7 @@ function PetList(props: petDisplayListProps) {
 		);
 
 	return pets.map((pet) => (
-		<Pet
+		<PetCard
 			key={pet._id}
 			petKey={pet._id}
 			pet={pet}
@@ -84,13 +40,6 @@ interface petDisplayListProps {
 	error: string;
 	pets: Pet[];
 	loaded: boolean;
-	fetchPets: (token: string) => void;
-	token: string;
-}
-
-interface PetProps {
-	petKey?: string;
-	pet: Pet;
 	fetchPets: (token: string) => void;
 	token: string;
 }

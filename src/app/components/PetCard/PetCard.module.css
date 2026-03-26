@@ -1,0 +1,36 @@
+.pet_container {
+	margin: 1rem 0;
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	outline: 1px solid purple;
+	border-radius: 5px;
+	transition: transform 0.2s ease-in;
+}
+
+.pet_container:hover {
+	transform: translate(10px);
+}
+
+.pet_container img {
+	outline: 1px solid black;
+	aspect-ratio: 1 / 1;
+	width: 10rem;
+	border-radius: 5px;
+}
+
+@media (max-width: 850px) {
+	.pet_container {
+		flex-direction: column-reverse;
+		align-items: center;
+		justify-content: space-around;
+	}
+}
+
+@media (max-width: 450px) {
+	.pet_container {
+		outline: none;
+	}
+}

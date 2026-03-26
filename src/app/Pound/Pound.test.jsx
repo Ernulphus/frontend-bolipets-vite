@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
+import React from 'react';
 import { MemoryRouter } from 'react-router';
 import Pound from './Pound';
 
