@@ -21,7 +21,6 @@ const epGroups: { [key: string]: string } = {
 	PETS: 'Pets',
 	USERS: 'Users',
 };
-const epSubgroups: { [key: string]: string } = {};
 
 const BACKEND_URL =
 	import.meta.env.VITE_PUBLIC_URL_PRE || 'https://bolipets.pythonanywhere.com';
@@ -40,7 +39,7 @@ function getURL(
 	if (!Object.values(methods).includes(method))
 		throw new Error('Invalid method');
 	const queryString = queryObj ? queryObjToString(queryObj) : '';
-	if (subgroup && !Object.values(epSubgroups).includes(subgroup))
+	if (subgroup && !Object.values(methods).includes(subgroup))
 		throw new Error('Endpoint subgroup not found');
 	const subgroupString = subgroup ? `${subgroup}/` : '';
 	const url = `${BACKEND_URL}/${group}/${subgroupString}${method}${queryString}`;
