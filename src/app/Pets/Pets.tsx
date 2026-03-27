@@ -1,48 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import PetCard, { type Pet } from '../components/PetCard/PetCard';
+import type { Pet } from '../components/PetCard/PetCard';
+import PetList from '../components/PetList/PetList';
 import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
-
-function ErrorMessage(props: ErrorMessageProps) {
-	const { message } = props;
-	return <div className="error-message">{message}</div>;
-}
-interface ErrorMessageProps {
-	message: string;
-}
-
-function PetList(props: petDisplayListProps) {
-	const { error, pets, loaded, fetchPets, token } = props;
-	if (error) return <ErrorMessage message={error} />;
-	if (!loaded) return <p>Loading pets...</p>;
-	if (!pets.length)
-		return (
-			<div>
-				<h2>No pets found.</h2>
-				<Link to="/createPet">Create one</Link> or{' '}
-				<Link to="/pound">adopt one now!</Link>
-			</div>
-		);
-
-	return pets.map((pet) => (
-		<PetCard
-			key={pet._id}
-			petKey={pet._id}
-			pet={pet}
-			fetchPets={fetchPets}
-			token={token}
-		/>
-	));
-}
-
-interface petDisplayListProps {
-	error: string;
-	pets: Pet[];
-	loaded: boolean;
-	fetchPets: (token: string) => void;
-	token: string;
-}
 
 interface petObject {
 	[key: string]: Pet;
