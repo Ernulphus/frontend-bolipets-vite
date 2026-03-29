@@ -1,9 +1,10 @@
 import { Link } from 'react-router';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import type { Pet } from '../PetCard/PetCard';
 import PetCard from '../PetCard/PetCard';
 
 export default function PetList(props: petDisplayListProps) {
-	const { error, pets, loaded, fetchPets, token } = props;
+	const { error, pets, loaded, fetchPets, token, disownMode } = props;
 	if (error) return <ErrorMessage message={error} />;
 	if (!loaded) return <p>Loading pets...</p>;
 	if (!pets.length)
@@ -22,6 +23,7 @@ export default function PetList(props: petDisplayListProps) {
 			pet={pet}
 			fetchPets={fetchPets}
 			token={token}
+			disownMode={disownMode}
 		/>
 	));
 }
@@ -32,4 +34,5 @@ interface petDisplayListProps {
 	loaded: boolean;
 	fetchPets: (token: string) => void;
 	token: string;
+	disownMode: boolean;
 }

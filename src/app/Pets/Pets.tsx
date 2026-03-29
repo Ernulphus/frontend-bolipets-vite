@@ -63,6 +63,7 @@ export default function Pets() {
 				loaded={loaded}
 				fetchPets={fetchPets}
 				token={token}
+				disownMode={true}
 			/>
 		</div>
 	);

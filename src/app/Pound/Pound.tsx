@@ -25,7 +25,8 @@ export default function Pound() {
 	const { getAccessTokenSilently } = useAuth0();
 
 	const fetchPets = useCallback((token: string) => {
-		petAdopteeRead(token)
+		console.log(token);
+		petAdopteeRead()
 			.then((data) => {
 				setPets(petsObjectToArray(data as petObject));
 				setLoaded(true);
@@ -43,13 +44,13 @@ export default function Pound() {
 			},
 		})
 			.then((userData) => {
-				fetchPets(userData);
+				fetchPets(token);
 				setToken(userData);
 			})
 			.catch((error: string) =>
 				setError(`There was a problem authorizing you. ${error}`),
 			);
-	}, [getAccessTokenSilently, fetchPets]);
+	}, [getAccessTokenSilently, fetchPets, token]);
 
 	return (
 		<div className="wrapper">
@@ -65,6 +66,7 @@ export default function Pound() {
 				loaded={loaded}
 				fetchPets={fetchPets}
 				token={token}
+				disownMode={false}
 			/>
 		</div>
 	);

@@ -1,18 +1,13 @@
 import { pet_images } from '../../constants';
-import { petDisown } from '../../utils/networkutils';
 import PetPreview from '../PetPreview/PetPreview';
+import DisownAdoptButton from './DisownAdoptButton';
 import style from './PetCard.module.css';
 
 export default function PetCard(props: PetProps) {
-	const { petKey: key, pet, token, fetchPets } = props;
+	const { petKey: key, pet, token, fetchPets, disownMode } = props;
 	const { Name, _id: id } = pet;
 	const dispFields: (keyof Pet)[] = ['color', 'mood', 'species'];
 	const petSpecies = pet.species;
-	const disownPet = () => {
-		petDisown(token, id).then(() => {
-			fetchPets(token);
-		});
-	};
 	return (
 		<div key={key} className={style.pet_container}>
 			{pet.species in pet_images && (
@@ -29,9 +24,12 @@ export default function PetCard(props: PetProps) {
 							</p>
 						);
 					})}
-				<button type="button" onClick={disownPet}>
-					Disown
-				</button>
+				<DisownAdoptButton
+					token={token}
+					id={id}
+					fetchPets={fetchPets}
+					disownMode={disownMode}
+				/>
 			</div>
 		</div>
 	);
@@ -50,4 +48,5 @@ interface PetProps {
 	pet: Pet;
 	fetchPets: (token: string) => void;
 	token: string;
+	disownMode: boolean;
 }
