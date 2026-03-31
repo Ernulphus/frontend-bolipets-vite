@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Pet } from '../Pets/Pets';
+import type { Pet } from '../components/PetCard/PetCard';
 
 const methods: { [key: string]: string } = {
 	CREATE: 'create',
