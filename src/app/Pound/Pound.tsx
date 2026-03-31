@@ -55,7 +55,7 @@ export default function Pound() {
 	return (
 		<div className="wrapper">
 			<header>
-				<h1>The Pound</h1>
+				<h1>The Bolipet Shelter</h1>
 				<Link to="/CreatePet">
 					<button type="button">Add a Pet</button>
 				</Link>

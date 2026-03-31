@@ -24,7 +24,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Pets />} />
 						<Route path="/CreatePet" element={<CreatePet />} />
-						<Route path="/Pound" element={<Pound />} />
+						<Route path="/Shelter" element={<Pound />} />
 					</Routes>
 				</div>
 			</BrowserRouter>

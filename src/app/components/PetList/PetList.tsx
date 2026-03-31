@@ -12,7 +12,7 @@ export default function PetList(props: petDisplayListProps) {
 			<div>
 				<h2>No pets found.</h2>
 				<Link to="/createPet">Create one</Link> or{' '}
-				<Link to="/pound">adopt one now!</Link>
+				<Link to="/Shelter">adopt one now!</Link>
 			</div>
 		);
 
