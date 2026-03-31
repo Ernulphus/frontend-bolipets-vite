@@ -2,9 +2,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import type { questionObj } from '../components/Form/Form';
 import Form, { getQuestionValue } from '../components/Form/Form';
+import type { Pet } from '../components/PetCard/PetCard';
 import PetPreview from '../components/PetPreview/PetPreview';
 import { pet_image_defaults, type pet_images } from '../constants';
-import type { Pet } from '../Pets/Pets';
 import { AUTH0_AUDIENCE, petsCreate, petsForm } from '../utils/networkutils';
 import './CreatePet.css';
 
