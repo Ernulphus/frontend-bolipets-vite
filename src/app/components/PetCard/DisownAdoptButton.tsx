@@ -1,4 +1,4 @@
-import { petAdopt, petAdopteeRead, petDisown } from '../../utils/networkutils';
+import { petAdopt, petDisown } from '../../utils/networkutils';
 
 interface DisownAdoptButtonProps {
 	token: string;
