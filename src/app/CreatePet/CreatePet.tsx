@@ -37,13 +37,9 @@ export default function CreatePet() {
 		const pet = Object.fromEntries(
 			form.map((q) => [q.fld_nm, q.value]),
 		) as unknown as Pet;
-
-		const newPet = {
-			email: user.email,
-			username: user.name,
-			...pet,
-		};
-		petsCreate(newPet, token)
+		pet.username = user.name || '';
+		pet.email = user.email || '';
+		petsCreate(pet, token)
 			.then(() => setSubmitted(true))
 			.catch(console.log);
 	};

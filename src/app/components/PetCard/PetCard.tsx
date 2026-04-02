@@ -43,6 +43,7 @@ export interface Pet {
 	species: keyof typeof pet_images;
 	_id: string;
 	username: string;
+	email: string;
 }
 
 interface PetProps {
