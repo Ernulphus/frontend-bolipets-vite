@@ -1,5 +1,7 @@
 import './PetProfile.css';
+import { useParams } from 'react-router';
 
 export default function PetProfile() {
-	return;
+	const { id } = useParams();
+	return <p>{id}</p>;
 }
