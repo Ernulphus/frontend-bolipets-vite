@@ -5,8 +5,8 @@ import style from './PetCard.module.css';
 
 export default function PetCard(props: PetProps) {
 	const { petKey: key, pet, token, fetchPets, disownMode } = props;
-	const { Name, _id: id } = pet;
-	const dispFields: (keyof Pet)[] = ['color', 'mood', 'species'];
+	const { Name, _id: id, username } = pet;
+	const dispFields: (keyof Pet)[] = ['species', 'mood'];
 	const petSpecies = pet.species;
 	return (
 		<div key={key} className={style.pet_container}>
@@ -24,6 +24,7 @@ export default function PetCard(props: PetProps) {
 							</p>
 						);
 					})}
+				<p>original owner: {username}</p>
 				<DisownAdoptButton
 					token={token}
 					id={id}
@@ -41,6 +42,7 @@ export interface Pet {
 	mood: number;
 	species: keyof typeof pet_images;
 	_id: string;
+	username: string;
 }
 
 interface PetProps {
