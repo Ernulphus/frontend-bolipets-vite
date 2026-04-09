@@ -10,7 +10,7 @@ import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
 
 export default function PetProfile() {
 	const [error, setError] = useState('');
-	const [pet, setPet] = useState([] as Pet[]);
+	const [pet, setPet] = useState<Pet>();
 	const [token, setToken] = useState('');
 	const [loaded, setLoaded] = useState(false);
 	const { id } = useParams();
@@ -21,7 +21,13 @@ export default function PetProfile() {
 			petsRead(token)
 				.then((data) => {
 					const pets = petsObjectToArray(data as petObject);
-					setPet(pets.filter((pet) => pet._id === id));
+					const petsFiltered = pets.filter((pet) => pet._id === id);
+					if (petsFiltered.length) {
+						setPet(petsFiltered[0]);
+					} else {
+						setError('Pet not found.');
+					}
+
 					setLoaded(true);
 				})
 				.catch((error: string) =>
@@ -49,11 +55,11 @@ export default function PetProfile() {
 
 	if (error) return <ErrorMessage message={error} />;
 	if (!loaded) return <p>Loading pets...</p>;
-	if (!pet.length) return <h2>Pet not found.</h2>;
+	if (!pet) return <h2>Pet not found.</h2>;
 	return (
 		<div className="wrapper">
 			<header>
-				<h1>{pet[0].Name}</h1>
+				<h1>{pet.Name}</h1>
 			</header>
 		</div>
 	);
