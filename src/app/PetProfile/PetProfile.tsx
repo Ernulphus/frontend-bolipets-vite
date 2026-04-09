@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
+import DisownAdoptButton from '../components/PetCard/DisownAdoptButton';
 import type { Pet } from '../components/PetCard/PetCard';
 import type { petObject } from '../Pets/Pets';
 import { petsObjectToArray } from '../Pets/Pets';
@@ -16,7 +17,7 @@ export default function PetProfile() {
 	const { id } = useParams();
 	const { getAccessTokenSilently } = useAuth0();
 
-	const fetchPets = useCallback(
+	const fetchPet = useCallback(
 		(token: string) => {
 			petsRead(token)
 				.then((data) => {
@@ -45,22 +46,30 @@ export default function PetProfile() {
 			},
 		})
 			.then((userData) => {
-				fetchPets(userData);
+				fetchPet(userData);
 				setToken(userData);
 			})
 			.catch((error: string) =>
 				setError(`There was a problem authorizing you. ${error}`),
 			);
-	}, [getAccessTokenSilently, fetchPets]);
+	}, [getAccessTokenSilently, fetchPet]);
 
+	const petNotFoundError = 'Pet not found.';
 	if (error) return <ErrorMessage message={error} />;
 	if (!loaded) return <p>Loading pets...</p>;
-	if (!pet) return <h2>Pet not found.</h2>;
+	if (!pet) return <ErrorMessage message={petNotFoundError} />;
+	if (!id) return <ErrorMessage message={petNotFoundError} />;
 	return (
 		<div className="wrapper">
 			<header>
 				<h1>{pet.Name}</h1>
 			</header>
+			<DisownAdoptButton
+				token={token}
+				id={id}
+				fetchPets={fetchPet}
+				disownMode={true}
+			/>
 		</div>
 	);
 }
