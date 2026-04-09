@@ -5,11 +5,11 @@ import type { Pet } from '../components/PetCard/PetCard';
 import PetList from '../components/PetList/PetList';
 import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
 
-interface petObject {
+export interface petObject {
 	[key: string]: Pet;
 }
 
-function petsObjectToArray(Data: petObject) {
+export function petsObjectToArray(Data: petObject) {
 	const keys = Object.keys(Data);
 	const pets = keys.map((key) => Data[key]);
 	return pets;
