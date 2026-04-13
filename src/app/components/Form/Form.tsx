@@ -121,6 +121,7 @@ interface FormProps {
 	onSubmit: (formData: FormData) => void;
 	images: { [key: string]: { [key: string]: string } };
 	setForm: Dispatch<[questionObj] | undefined>;
+	submitText: string;
 }
 
 export default function Form({
@@ -128,6 +129,7 @@ export default function Form({
 	onSubmit,
 	images,
 	setForm,
+	submitText = 'Submit',
 }: FormProps) {
 	return (
 		<form className={styles.form}>
@@ -174,6 +176,7 @@ export default function Form({
 				className={styles.submit_button}
 				type="submit"
 				formAction={onSubmit}
+				value={submitText}
 			/>
 		</form>
 	);
