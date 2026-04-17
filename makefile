@@ -1,10 +1,14 @@
-.PHONY: commit preview prod all
+.PHONY: commit preview prod all setup
 
 lint:
 	npm run lint
 
 tests:
 	npx vitest run
+
+build:
+	npm run build
+
 
 continuous_tests:
 	npm run test
@@ -14,17 +18,19 @@ stage:
 
 commit: stage
 
+setup: lint tests build stage
+
 prod-push:
 	git checkout prod
 	git merge main
 	git push origin prod
 	git checkout main
 
-prod: lint tests stage prod-push
+prod: setup prod-push
 
 preview-push:
 	git push origin main
 
-preview: lint tests stage preview-push
+preview: setup preview-push
 
-all: lint tests stage preview-push prod-push
+all: setup preview-push prod-push
