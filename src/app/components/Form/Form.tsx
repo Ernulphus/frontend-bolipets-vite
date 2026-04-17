@@ -121,7 +121,7 @@ interface FormProps {
 	onSubmit: (formData: FormData) => void;
 	images: { [key: string]: { [key: string]: string } };
 	setForm: Dispatch<[questionObj] | undefined>;
-	submitText: string;
+	submitText: string | undefined;
 }
 
 export default function Form({
