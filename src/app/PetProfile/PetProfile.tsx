@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import DisownAdoptButton from '../components/PetCard/DisownAdoptButton';
 import type { Pet } from '../components/PetCard/PetCard';
+import PetPreview from '../components/PetPreview/PetPreview';
 import type { petObject } from '../Pets/Pets';
 import { petsObjectToArray } from '../Pets/Pets';
 import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
@@ -64,6 +65,7 @@ export default function PetProfile() {
 			<header>
 				<h1>{pet.Name}</h1>
 			</header>
+			<PetPreview color={pet.color} pet={pet.species} />
 			<DisownAdoptButton
 				token={token}
 				id={id}
