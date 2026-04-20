@@ -49,6 +49,11 @@ export interface Pet {
 	email: string;
 }
 
+export interface PetAppearance {
+	color: string;
+	species: keyof typeof pet_images;
+}
+
 interface PetProps {
 	petKey?: string;
 	pet: Pet;

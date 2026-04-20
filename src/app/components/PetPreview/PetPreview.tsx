@@ -1,11 +1,9 @@
 import { pet_images } from '../../constants';
-import type { Pet } from '../PetCard/PetCard';
+import type { Pet, PetAppearance } from '../PetCard/PetCard';
 import styles from './PetPreview.module.css';
 
-type petImages = typeof pet_images;
-
 interface PetPreviewProps {
-	pet: Pet;
+	pet: Pet | PetAppearance;
 }
 
 export default function PetPreview({ pet }: PetPreviewProps) {

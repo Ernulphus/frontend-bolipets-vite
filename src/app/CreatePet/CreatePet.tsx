@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import type { questionObj } from '../components/Form/Form';
 import Form, { getQuestionValue } from '../components/Form/Form';
-import type { Pet } from '../components/PetCard/PetCard';
+import type { Pet, PetAppearance } from '../components/PetCard/PetCard';
 import PetPreview from '../components/PetPreview/PetPreview';
 import { pet_image_defaults, type pet_images } from '../constants';
 import { AUTH0_AUDIENCE, petsCreate, petsForm } from '../utils/networkutils';
@@ -44,6 +44,10 @@ export default function CreatePet() {
 			.catch(console.log);
 	};
 	const titleText = 'Your new Bolipet!';
+	const petAppearance: PetAppearance = {
+		color: getQuestionValue(form, 'color') || '#000000',
+		species: (getQuestionValue(form, 'species') || 'esquardo') as keyof typeof pet_images,
+	}
 	return (
 		<div className="create-pet m-5 flex flex-col items-center">
 			<div>
@@ -57,8 +61,7 @@ export default function CreatePet() {
 					/>
 					{submitted && <p>Pet created!</p>}
 					<PetPreview
-						color={getQuestionValue(form, 'color')}
-						pet={getQuestionValue(form, 'species') as keyof typeof pet_images}
+						pet={petAppearance}
 					/>
 				</div>
 			</div>
