@@ -1,19 +1,18 @@
 import { pet_images } from '../../constants';
+import type { Pet } from '../PetCard/PetCard';
 import styles from './PetPreview.module.css';
 
 type petImages = typeof pet_images;
 
-interface PetPreviewProps<K extends keyof petImages> {
-	color: string | undefined;
-	pet: K | undefined;
+interface PetPreviewProps {
+	pet: Pet;
 }
 
-export default function PetPreview<K extends keyof petImages>({
-	color,
-	pet,
-}: PetPreviewProps<K>) {
-	const defaultImageURL = `url('/PetImages/${pet}/${pet}.png')`;
-	if (!pet) return;
+export default function PetPreview({ pet }: PetPreviewProps) {
+	const { color, species } = pet;
+	console.log(species);
+	const defaultImageURL = `url('/PetImages/${species}/${species}.png')`;
+	if (!species) return;
 	return (
 		<div className={styles.pet_preview}>
 			<div
@@ -23,7 +22,7 @@ export default function PetPreview<K extends keyof petImages>({
 					WebkitMaskImage: defaultImageURL,
 				}}
 			/>
-			<img alt={pet} src={pet_images[pet].TRANSPARENT} />
+			<img alt={species} src={pet_images[species].TRANSPARENT} />
 		</div>
 	);
 }

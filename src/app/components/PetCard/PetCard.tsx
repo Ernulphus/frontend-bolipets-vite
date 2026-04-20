@@ -9,12 +9,11 @@ export default function PetCard(props: PetProps) {
 	const { petKey: key, pet, token, fetchPets, disownMode } = props;
 	const { Name, _id: id, username } = pet;
 	const dispFields: (keyof Pet)[] = ['species', 'mood'];
-	const petSpecies = pet.species;
 	return (
 		<Link to={`${PET}/${id}`}>
 			<div key={key} className={style.pet_container}>
 				{pet.species in pet_images && (
-					<PetPreview color={pet.color} pet={petSpecies} />
+					<PetPreview pet={pet} />
 				)}
 				<div>
 					<h2>{Name}</h2>

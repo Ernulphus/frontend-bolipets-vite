@@ -65,7 +65,7 @@ export default function PetProfile() {
 			<header>
 				<h1>{pet.Name}</h1>
 			</header>
-			<PetPreview color={pet.color} pet={pet.species} />
+			<PetPreview pet={pet} />
 			<DisownAdoptButton
 				token={token}
 				id={id}
