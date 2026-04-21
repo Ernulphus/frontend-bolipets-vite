@@ -82,6 +82,18 @@ const petsRead = (token: string | null) => {
 	});
 };
 
+const petRead = (token: string | null, id: string | undefined) => {
+	const url = `${getURL(epGroups.PETS, methods.READ)}?id=${id}`;
+	return new Promise((resolve, reject) => {
+		axios
+			.get(url, {
+				headers: { Authorization: `${token}` },
+			})
+			.then(({ data }) => resolve(data))
+			.catch(reject);
+	});
+};
+
 const petsForm = () => {
 	const url = getURL(epGroups.PETS, methods.FORM);
 	return new Promise((resolve, reject) => {
@@ -151,6 +163,7 @@ export {
 	getURL,
 	methods,
 	petsCreate,
+	petRead,
 	petsRead,
 	petsForm,
 	petsDelete,

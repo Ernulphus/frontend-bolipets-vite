@@ -8,7 +8,7 @@ import type { Pet } from '../components/PetCard/PetCard';
 import PetPreview from '../components/PetPreview/PetPreview';
 import type { petObject } from '../Pets/Pets';
 import { petsObjectToArray } from '../Pets/Pets';
-import { AUTH0_AUDIENCE, petsRead } from '../utils/networkutils';
+import { AUTH0_AUDIENCE, petRead } from '../utils/networkutils';
 
 export default function PetProfile() {
 	const [error, setError] = useState('');
@@ -20,7 +20,7 @@ export default function PetProfile() {
 
 	const fetchPet = useCallback(
 		(token: string) => {
-			petsRead(token)
+			petRead(token, id)
 				.then((data) => {
 					const pets = petsObjectToArray(data as petObject);
 					console.log(id, data)
