@@ -10,32 +10,27 @@ export default function PetCard(props: PetProps) {
 	const { Name, _id: id, username } = pet;
 	const dispFields: (keyof Pet)[] = ['species', 'mood'];
 	return (
-		<Link to={`${PET}/${id}`}>
-			<div key={key} className={style.pet_container}>
-				{pet.species in pet_images && (
-					<PetPreview pet={pet} />
-				)}
-				<div>
-					<h2>{Name}</h2>
-					{dispFields
-						.filter((fld) => pet[fld])
-						.map((fld) => {
-							return (
-								<p key={pet[fld]}>
-									{fld}: {pet[fld]}
-								</p>
-							);
-						})}
-					<p>original owner: {username}</p>
-					<DisownAdoptButton
-						token={token}
-						id={id}
-						fetchPets={fetchPets}
-						disownMode={disownMode}
-					/>
-				</div>
+		<div key={key} className={style.pet_container}>
+			{pet.species in pet_images && (
+				<PetPreview pet={pet} />
+			)}
+			<div>
+				<h2>{Name}</h2>
+				{dispFields
+					.filter((fld) => pet[fld])
+					.map((fld) => {
+						return (
+							<p key={pet[fld]}>
+								{fld}: {pet[fld]}
+							</p>
+						);
+					})}
+				<p>original owner: {username}</p>
+				<Link className="buttonlike" to={`/${PET}/${id}`}>
+					View pet profile
+				</Link>
 			</div>
-		</Link>
+		</div>
 	);
 }
 

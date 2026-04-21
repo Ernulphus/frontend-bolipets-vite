@@ -55,6 +55,23 @@ button:hover {
 	color: var(--background-color);
 }
 
+.buttonlike {
+	font-size: 1rem;
+	padding: 0.25rem 0.75rem;
+	cursor: pointer;
+
+	border-radius: 5px;
+	border: 2px solid var(--accent-color);
+	color: var(--accent-color);
+	background: var(--background-color);
+	transition: background 0.2s;
+}
+.buttonlike:focus,
+.buttonlike:hover {
+	background: var(--accent-color);
+	color: var(--background-color);
+}
+
 .error-message {
 	border: 2px solid var(--buff);
 	padding: 1em;

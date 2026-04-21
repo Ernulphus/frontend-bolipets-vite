@@ -23,6 +23,7 @@ export default function PetProfile() {
 			petsRead(token)
 				.then((data) => {
 					const pets = petsObjectToArray(data as petObject);
+					console.log(id, data)
 					const petsFiltered = pets.filter((pet) => pet._id === id);
 					if (petsFiltered.length) {
 						setPet(petsFiltered[0]);

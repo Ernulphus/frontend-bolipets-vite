@@ -8,7 +8,6 @@ interface PetPreviewProps {
 
 export default function PetPreview({ pet }: PetPreviewProps) {
 	const { color, species } = pet;
-	console.log(species);
 	const defaultImageURL = `url('/PetImages/${species}/${species}.png')`;
 	if (!species) return;
 	return (
