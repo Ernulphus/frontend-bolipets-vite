@@ -2,11 +2,10 @@ import { Link } from 'react-router';
 import { pet_images } from '../../constants';
 import { PET } from '../../utils/routeutils';
 import PetPreview from '../PetPreview/PetPreview';
-import DisownAdoptButton from './DisownAdoptButton';
 import style from './PetCard.module.css';
 
 export default function PetCard(props: PetProps) {
-	const { petKey: key, pet, token, fetchPets, disownMode } = props;
+	const { petKey: key, pet } = props;
 	const { Name, _id: id, username } = pet;
 	const dispFields: (keyof Pet)[] = ['species', 'mood'];
 	return (
