@@ -41,6 +41,7 @@ export interface Pet {
 	_id: string;
 	username: string;
 	email: string;
+	sub: string | null;
 }
 
 export interface PetAppearance {

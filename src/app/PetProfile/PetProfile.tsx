@@ -23,7 +23,7 @@ export default function PetProfile() {
 			petRead(token, id)
 				.then((data) => {
 					const pets = petsObjectToArray(data as petObject);
-					console.log(id, data)
+					console.log(id, data);
 					const petsFiltered = pets.filter((pet) => pet._id === id);
 					if (petsFiltered.length) {
 						setPet(petsFiltered[0]);
@@ -54,13 +54,14 @@ export default function PetProfile() {
 			.catch((error: string) =>
 				setError(`There was a problem authorizing you. ${error}`),
 			);
-	}, [getAccessTokenSilently, fetchPet]);
+	}, [getAccessTokenSilently, fetchPet, token]);
 
 	const petNotFoundError = 'Pet not found.';
 	if (error) return <ErrorMessage message={error} />;
 	if (!loaded) return <p>Loading pets...</p>;
 	if (!pet) return <ErrorMessage message={petNotFoundError} />;
 	if (!id) return <ErrorMessage message={petNotFoundError} />;
+	const disownMode = pet.sub !== null;
 	return (
 		<div className="wrapper">
 			<header>
@@ -71,7 +72,7 @@ export default function PetProfile() {
 				token={token}
 				id={id}
 				fetchPets={fetchPet}
-				disownMode={true}
+				disownMode={disownMode}
 			/>
 		</div>
 	);
