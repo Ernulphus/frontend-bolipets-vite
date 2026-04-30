@@ -54,7 +54,7 @@ export default function PetProfile() {
 			.catch((error: string) =>
 				setError(`There was a problem authorizing you. ${error}`),
 			);
-	}, [getAccessTokenSilently, fetchPet, token]);
+	}, [getAccessTokenSilently, fetchPet]);
 
 	const petNotFoundError = 'Pet not found.';
 	if (error) return <ErrorMessage message={error} />;
