@@ -61,7 +61,7 @@ export default function PetProfile() {
 	if (!loaded) return <p>Loading pets...</p>;
 	if (!pet) return <ErrorMessage message={petNotFoundError} />;
 	if (!id) return <ErrorMessage message={petNotFoundError} />;
-	const disownMode = pet.sub !== null;
+	const petIsOwned = pet.sub !== null;
 	return (
 		<div className="wrapper">
 			<header>
@@ -72,7 +72,7 @@ export default function PetProfile() {
 				token={token}
 				id={id}
 				fetchPets={fetchPet}
-				disownMode={disownMode}
+				disownMode={petIsOwned}
 			/>
 		</div>
 	);
