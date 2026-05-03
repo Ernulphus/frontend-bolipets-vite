@@ -15,6 +15,7 @@ const methods: { [key: string]: string } = {
 
 	DISOWN: 'disown',
 	ADOPT: 'adopt',
+	FEED: 'feed',
 };
 
 const epGroups: { [key: string]: string } = {
@@ -157,6 +158,24 @@ const petAdopt = (token: string | null, id: string) => {
 	});
 };
 
+const petFeed = (token: string | null, id: string) => {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(
+				getURL(epGroups.PETS, methods.FEED),
+				{ id: id },
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `${token}`,
+					},
+				},
+			)
+			.then(resolve)
+			.catch(reject);
+	});
+};
+
 export {
 	AUTH0_AUDIENCE,
 	epGroups,
@@ -170,4 +189,5 @@ export {
 	petAdopt,
 	petDisown,
 	petAdopteeRead,
+	petFeed,
 };
